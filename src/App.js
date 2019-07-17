@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
-import ReactPlayer from 'react-player'
 
 // importing components
-import Image from './components/Image'
-import InfoCard from './components/InfoCard'
+import Top from "./Top.js";
+import Image from './components/Image';
+import InfoCard from './components/InfoCard';
+import DatePicker from "./components/DatePicker";
 
 function App() {
   // state hooks 
@@ -32,8 +33,10 @@ function App() {
 
   return (
     <div className="App">
-      <Image url= {APOD} imageType = {apodType} />
-      <InfoCard title = {title} content = {content} date ={date} />
+      <Top/>
+      <DatePicker />
+      <Image title = {title} url= {APOD} imageType = {apodType} />
+      <InfoCard content = {content} date ={date} />
     </div>
   );
 }

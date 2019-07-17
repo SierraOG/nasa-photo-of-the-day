@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import ReactPlayer from 'react-player'
 
-function Image({url, imageType}){
+function Image({title, url, imageType}){
     if (imageType === 'video'){
-        return (<ReactPlayer url={url} playing/>)
+        return (
+            <div>
+                <h1> {title}</h1>
+                <div className="img-container">
+                    <ReactPlayer url={url} playing/>
+                </div>
+            </div>
+        )
     }
-    else{
-        return (<img src={url}/> )
+    else {
+        return (
+            <div>
+                <h1> {title}</h1>
+                <div className="img-container">
+                    <img src={url}/> 
+                </div>
+            </div>
+        )
     }
 }
 
