@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import OptionMaker from './OptionMaker'
 
 function DatePicker(){
     let monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
@@ -7,49 +8,33 @@ function DatePicker(){
         daytext.push(i)
     }
     let yeartext = []
-    for (let i = 2012; i<2019;i++){
+    for (let i = 2000; i<2020;i++){
         yeartext.push(i)
     }
     let today=new Date()
 
-    console.log(today)
+    let d = today.getDate();
 
-    var dd = today.getDate();
+    let m = monthtext[today.getMonth()+1]; 
+    let yyyy = today.getFullYear();
 
-    var mm = today.getMonth()+1; 
-    var yyyy = today.getFullYear();
-    if(dd<10) 
-    {
-        dd='0'+dd;
-    } 
+    const [day, setDay] = useState(d)
+    const [month, setMonth] = useState(m)
+    const [year, setYear] = useState(yyyy)
 
-    if(mm<10) 
-    {
-        mm='0'+mm;
-    } 
 
-    let todayFormatted = `${yyyy}-${mm}-${dd}`
-    const [date, setDate] = useState(todayFormatted)
-
+    console.log(day)
     return (
         <form className = "date-form">
-            <select className="daydropdown">
-                <option value ='1'> 1 </option>
-                <option value ='2'> 2 </option>
-                <option value ='3'> 3 </option>
+            <select value = {day} className="daydropdown" >
+                {daytext.map( (item) => <OptionMaker item = {item} />)}
             </select> 
-            <select className="monthdropdown">
-                <option value ='1'> 1 </option>
-                <option value ='2'> 2 </option>
-                <option value ='3'> 3 </option>
+            <select value ={month} className="monthdropdown">
+                {monthtext.map( (item) => <OptionMaker item = {item} />)}
             </select> 
-            <select className="yeardropdown">
-                <option value ='1'> 2001 </option>
-                <option value ='2'> 2002 </option>
-                <option value ='3'> 2003 </option>
+            <select value ={year} className="yeardropdown">
+                {yeartext.map( (item) => <OptionMaker item = {item} />)}
             </select> 
-            {/* <input value="date" type="text" onChange = { () => setDate(value)}>
-            <input type="submit" value = "Submit"> */}
         </form>
     )
 }
