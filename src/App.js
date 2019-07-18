@@ -17,34 +17,8 @@ function App() {
   const [date, setDate] = useState("")
 
 
-  // for date 
-    
+  // months for getting the date 
   let months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-  let monthtext = []
-  for (let i = 0; i<12; i++){
-    monthtext.push({
-      key: months[i],
-      text: months[i],
-      value: months[i],
-    })
-  }
-
-  let daytext = []
-  for (let i =1; i<33; i++){
-    daytext.push({
-      key: i,
-      text: i,
-      value: i,
-    })
-  }
-  let yeartext = []
-  for (let i = 2000; i<2020;i++){
-    yeartext.push({
-      key: i,
-      text: i,
-      value: i,
-    })
-  }
 
   // gets todays date
   let today=new Date()
@@ -54,13 +28,27 @@ function App() {
   let m = months[today.getMonth()]; 
   let yyyy = today.getFullYear();
 
+  // sets day, month, and year states to today
   const [day, setDay] = useState(d)
   const [month, setMonth] = useState(m)
   const [year, setYear] = useState(yyyy)
 
+  // initializes the date that will be used to select api data
+  let queryDate = ''
+
   // gets data and udpates the state values
   useEffect(() => {
-    axios.get('https://api.nasa.gov/planetary/apod?api_key=kiITos2TeqNtXey1N7zrTx0y1lTosT4gNR8ptJEB')
+    // updates day
+    setDay(day)
+    setMonth(month)
+    setYear(year)
+    // formats day and month before adding to queryDate
+    let queryDay = (day < 10) ? `0${day}` : `${day} `
+    let queryMonth = ((months.indexOf(month) + 1) < 10) ? `0${months.indexOf(month) + 1}` : `${months.indexOf(month) +1}` 
+    queryDate = `${year}-${queryMonth}-${queryDay}`  
+    console.log(queryDate)
+
+    axios.get(`https://api.nasa.gov/planetary/apod?api_key=kiITos2TeqNtXey1N7zrTx0y1lTosT4gNR8ptJEB&date=${queryDate}`)
     .then( data => {
       setPictureUrl(data.data.url)
       setTitle(data.data.title)
@@ -71,7 +59,8 @@ function App() {
     .catch(error=>{
       console.log('error')
     })
-  }, [])
+    // updates every time day month or year changes
+  }, [day, month, year])
 
   // builds app
   return (

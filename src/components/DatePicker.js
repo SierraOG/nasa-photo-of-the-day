@@ -43,15 +43,6 @@ import { Dropdown } from 'semantic-ui-react'
 
 // {day,setDay,month,setMonth,year,setYear}
 const DropdownDatePicker = ({day,setDay, month, setMonth, year, setYear}) => {
-
-    useEffect(()=> {
-        setDay(day)
-        setMonth(month)
-        setYear(year)
-        console.log(day)
-        console.log(month)
-        console.log(year)
-    })
     
     const getDay = ( event, {value}) => {
         setDay(event.target.textContent)
