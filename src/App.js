@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import axios from "axios";
+import styled from 'styled-components';
 
 // importing components
 import Top from "./Top.js";
 import Image from './components/Image';
 import InfoCard from './components/InfoCard';
 import DropdownDatePicker from "./components/DatePicker";
+
+// style App div
+const AppContainer = styled.div`
+  text-align: center;
+  width: 80%;
+  margin: auto;
+`;
+
 
 function App() {
   // state hooks 
@@ -64,12 +72,12 @@ function App() {
 
   // builds app
   return (
-    <div className="App">
+    <AppContainer>
       <Top/>
       <DropdownDatePicker day = {day} setDay ={setDay} month = {month} setMonth = {setMonth} year={year} setYear={setYear}/>
       <Image title = {title} url= {APOD} imageType = {apodType} />
       <InfoCard content = {content} date ={date} />
-    </div>
+    </AppContainer>
   );
 }
 

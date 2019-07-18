@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 // used to play videos
 import ReactPlayer from 'react-player'
 import styled from 'styled-components';
@@ -7,6 +7,10 @@ const ImageContainer = styled.div`
     margin: 10px auto;
     display: flex;
     justify-content: space-evenly;
+`;
+
+const Img = styled.img`
+    max-width: 800px;
 `;
 
 
@@ -27,7 +31,7 @@ function Image({title, url, imageType}){
             <div>
                 <h1> {title}</h1>
                 <ImageContainer>
-                    <img src={url}/> 
+                    <Img src={url}/> 
                 </ImageContainer>
             </div>
         )
