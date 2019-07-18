@@ -17,13 +17,46 @@ function App() {
   const [date, setDate] = useState("")
 
 
+  // for date 
+    
+  let months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+  let monthtext = []
+  for (let i = 0; i<12; i++){
+    monthtext.push({
+      key: months[i],
+      text: months[i],
+      value: months[i],
+    })
+  }
+
+  let daytext = []
+  for (let i =1; i<33; i++){
+    daytext.push({
+      key: i,
+      text: i,
+      value: i,
+    })
+  }
+  let yeartext = []
+  for (let i = 2000; i<2020;i++){
+    yeartext.push({
+      key: i,
+      text: i,
+      value: i,
+    })
+  }
+
+  // gets todays date
   let today=new Date()
 
   // formats and seperates the date into the same format as the arrays above
   let d = today.getDate();
-  //let m = months[today.getMonth()]; 
-  //let yyyy = today.getFullYear();
+  let m = months[today.getMonth()]; 
+  let yyyy = today.getFullYear();
+
   const [day, setDay] = useState(d)
+  const [month, setMonth] = useState(m)
+  const [year, setYear] = useState(yyyy)
 
   // gets data and udpates the state values
   useEffect(() => {
@@ -44,7 +77,7 @@ function App() {
   return (
     <div className="App">
       <Top/>
-      <DropdownDatePicker day = {day} setDay ={setDay} />
+      <DropdownDatePicker day = {day} setDay ={setDay} month = {month} setMonth = {setMonth} year={year} setYear={setYear}/>
       <Image title = {title} url= {APOD} imageType = {apodType} />
       <InfoCard content = {content} date ={date} />
     </div>

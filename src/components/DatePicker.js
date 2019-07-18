@@ -1,95 +1,70 @@
 import React, { useState, useEffect } from 'react'
-// component
-// import OptionMaker from './OptionMaker'
-
-// function DatePicker(){
-//     // make arrays of what will be dropdown options
-//     let monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-//     let daytext = []
-//     for (let i =1; i<33; i++){
-//         daytext.push(i)
-//     }
-//     let yeartext = []
-//     for (let i = 2000; i<2020;i++){
-//         yeartext.push(i)
-//     }
-//     // gets todays date
-//     let today=new Date()
-
-//     // formats and seperates the date into the same format as the arrays above
-//     let d = today.getDate();
-//     let m = monthtext[today.getMonth()]; 
-//     let yyyy = today.getFullYear();
-
-//     // set up states for day month and year initializing them w todays date
-//     const [day, setDay] = useState(d)
-//     const [month, setMonth] = useState(m)
-//     const [year, setYear] = useState(yyyy)
-
-//     // sets up form maping through the arrays above and passing that data into OptionMaker and sets the value of each select to the current time
-//     return (
-//         <form className = "date-form">
-//             <select value = {day} className="daydropdown" >
-//                 {daytext.map( (item) => <OptionMaker  item = {item} setDay={setDay} />)}
-//             </select> 
-//             <select value ={month} className="monthdropdown">
-//                 {monthtext.map( (item) => <OptionMaker item = {item} setMonth = {setMonth} />)}
-//             </select> 
-//             <select value ={year} className="yeardropdown">
-//                 {yeartext.map( (item) => <OptionMaker item = {item} setYear = {setYear} />)}
-//             </select> 
-//         </form>
-//     )
-// }
-
-// export default DatePicker
-
 
 import { Dropdown } from 'semantic-ui-react'
 // import console = require('console');
 
 
-let months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-let monthtext = []
-for (let i = 0; i<12; i++){
+  // for date 
+    
+  let months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+  let monthtext = []
+  for (let i = 0; i<12; i++){
     monthtext.push({
-        key: months[i],
-        text: months[i],
-        value: months[i],
+      key: months[i],
+      text: months[i],
+      value: months[i],
     })
-}
+  }
 
-let daytext = []
-for (let i =1; i<33; i++){
+  let daytext = []
+  for (let i =1; i<33; i++){
     daytext.push({
-        key: i,
-        text: i,
-        value: i,
+      key: i,
+      text: i,
+      value: i,
     })
-}
-let yeartext = []
-for (let i = 2000; i<2020;i++){
+  }
+  let yeartext = []
+  for (let i = 2000; i<2020;i++){
     yeartext.push({
-        key: i,
-        text: i,
-        value: i,
+      key: i,
+      text: i,
+      value: i,
     })
-}
+  }
 
-// gets todays date
-let today=new Date()
+  // gets todays date
+  let today=new Date()
 
-// formats and seperates the date into the same format as the arrays above
-let d = today.getDate();
-let m = months[today.getMonth()]; 
-let yyyy = today.getFullYear();
+  // formats and seperates the date into the same format as the arrays above
+  let d = today.getDate();
+  let m = months[today.getMonth()]; 
+  let yyyy = today.getFullYear();
 
 // {day,setDay,month,setMonth,year,setYear}
-const DropdownDatePicker = ({day,setDay}) => {
-    const getDay = (event, {value}) => {
-        setDay(value)
+const DropdownDatePicker = ({day,setDay, month, setMonth, year, setYear}) => {
+
+    useEffect(()=> {
+        setDay(day)
+        setMonth(month)
+        setYear(year)
         console.log(day)
+        console.log(month)
+        console.log(year)
+    })
+    
+    const getDay = ( event, {value}) => {
+        setDay(event.target.textContent)
     }
+
+    const getMonth = (event, {value}) => {
+        setMonth(event.target.textContent)
+    }
+
+    const getYear = (event, {value}) => {
+        setYear(event.target.textContent)
+    }
+
   return(
     <React.Fragment>
     <Dropdown
@@ -104,12 +79,14 @@ const DropdownDatePicker = ({day,setDay}) => {
         closeOnBlur
         selection
         options={yeartext}
+        onChange={getYear}
     />{' '}
     <Dropdown
         placeholder={m}
         closeOnBlur
         selection
         options={monthtext}
+        onChange={getMonth}
     />{' '}
     </React.Fragment>
   )
