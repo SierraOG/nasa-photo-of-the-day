@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react'
 // used to play videos
 import ReactPlayer from 'react-player'
+import styled from 'styled-components';
+
+const ImageContainer = styled.div`
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-evenly;
+`;
+
 
 // returns the image or video from the data. Takes image type and has if statement to determine how to display the content depending on if it is a image or video 
 function Image({title, url, imageType}){
@@ -8,9 +16,9 @@ function Image({title, url, imageType}){
         return (
             <div>
                 <h1> {title}</h1>
-                <div className="img-container">
+                <ImageContainer>
                     <ReactPlayer url={url} playing/>
-                </div>
+                </ImageContainer>
             </div>
         )
     }
@@ -18,9 +26,9 @@ function Image({title, url, imageType}){
         return (
             <div>
                 <h1> {title}</h1>
-                <div className="img-container">
+                <ImageContainer>
                     <img src={url}/> 
-                </div>
+                </ImageContainer>
             </div>
         )
     }

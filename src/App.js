@@ -6,7 +6,7 @@ import axios from "axios";
 import Top from "./Top.js";
 import Image from './components/Image';
 import InfoCard from './components/InfoCard';
-import DatePicker from "./components/DatePicker";
+import DropdownDatePicker from "./components/DatePicker";
 
 function App() {
   // state hooks 
@@ -15,6 +15,15 @@ function App() {
   const [apodType, setType] = useState("")
   const [content, setContent] = useState("")
   const [date, setDate] = useState("")
+
+
+  let today=new Date()
+
+  // formats and seperates the date into the same format as the arrays above
+  let d = today.getDate();
+  //let m = months[today.getMonth()]; 
+  //let yyyy = today.getFullYear();
+  const [day, setDay] = useState(d)
 
   // gets data and udpates the state values
   useEffect(() => {
@@ -35,7 +44,7 @@ function App() {
   return (
     <div className="App">
       <Top/>
-      <DatePicker />
+      <DropdownDatePicker day = {day} setDay ={setDay} />
       <Image title = {title} url= {APOD} imageType = {apodType} />
       <InfoCard content = {content} date ={date} />
     </div>
