@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+// the top or header portion of the page
 function Top() {
     return(
         <div>

@@ -16,10 +16,10 @@ function App() {
   const [content, setContent] = useState("")
   const [date, setDate] = useState("")
 
+  // gets data and udpates the state values
   useEffect(() => {
     axios.get('https://api.nasa.gov/planetary/apod?api_key=kiITos2TeqNtXey1N7zrTx0y1lTosT4gNR8ptJEB')
     .then( data => {
-      console.log(data)
       setPictureUrl(data.data.url)
       setTitle(data.data.title)
       setType(data.data.media_type)
@@ -31,6 +31,7 @@ function App() {
     })
   }, [])
 
+  // builds app
   return (
     <div className="App">
       <Top/>
