@@ -17,7 +17,7 @@ const AppContainer = styled.div`
 
 
 function App() {
-  // state hooks 
+  // state hooks for nasa data
   const [APOD, setPictureUrl] = useState("")
   const [title, setTitle] = useState("")
   const [apodType, setType] = useState("")
@@ -25,13 +25,13 @@ function App() {
   const [date, setDate] = useState("")
 
 
-  // months for getting the date 
+  // array of month names
   let months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 
   // gets todays date
   let today=new Date()
 
-  // formats and seperates the date into the same format as the arrays above
+  // seperates the current date and formats it in the way I want my dropdowns to be
   let d = today.getDate();
   let m = months[today.getMonth()]; 
   let yyyy = today.getFullYear();
@@ -46,16 +46,18 @@ function App() {
 
   // gets data and udpates the state values
   useEffect(() => {
-    // updates day
+    // updates the states 
     setDay(day)
     setMonth(month)
     setYear(year)
-    // formats day and month before adding to queryDate
+    // formats day and month before combining them to queryDate
+    // the api takes the format ...&date=yyyy-mm-dd so the month has to be changed from the string month name to a number
+    // also if the day or month is less than 10 it needs be two numbers and have a 0 in front 
     let queryDay = (day < 10) ? `0${day}` : `${day} `
     let queryMonth = ((months.indexOf(month) + 1) < 10) ? `0${months.indexOf(month) + 1}` : `${months.indexOf(month) +1}` 
     queryDate = `${year}-${queryMonth}-${queryDay}`  
-    console.log(queryDate)
 
+    // gets data and updates states 
     axios.get(`https://api.nasa.gov/planetary/apod?api_key=kiITos2TeqNtXey1N7zrTx0y1lTosT4gNR8ptJEB&date=${queryDate}`)
     .then( data => {
       setPictureUrl(data.data.url)
@@ -66,6 +68,7 @@ function App() {
     })
     .catch(error=>{
       console.log('error')
+      alert('Select a different day')
     })
     // updates every time day month or year changes
   }, [day, month, year])
@@ -74,7 +77,7 @@ function App() {
   return (
     <AppContainer>
       <Top/>
-      <DropdownDatePicker day = {day} setDay ={setDay} month = {month} setMonth = {setMonth} year={year} setYear={setYear}/>
+      <DropdownDatePicker months = {months} d={d} m={m} yyyy={yyyy} setDay ={setDay} setMonth = {setMonth} setYear={setYear}/>
       <Image title = {title} url= {APOD} imageType = {apodType} />
       <InfoCard content = {content} date ={date} />
     </AppContainer>
