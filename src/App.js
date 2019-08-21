@@ -8,6 +8,8 @@ import Image from './components/Image';
 import InfoCard from './components/InfoCard';
 import DropdownDatePicker from "./components/DatePicker";
 
+import Loader from 'react-loader-spinner';
+
 // style App div
 const AppContainer = styled.div`
   text-align: center;
@@ -23,6 +25,8 @@ function App() {
   const [apodType, setType] = useState("")
   const [content, setContent] = useState("")
   const [date, setDate] = useState("")
+
+  const [isLoading, setIsLoading] = useState(false)
 
 
   // array of month names
@@ -57,6 +61,7 @@ function App() {
     let queryMonth = ((months.indexOf(month) + 1) < 10) ? `0${months.indexOf(month) + 1}` : `${months.indexOf(month) +1}` 
     queryDate = `${year}-${queryMonth}-${queryDay}`  
 
+    setIsLoading(true)
     // gets data and updates states 
     axios.get(`https://api.nasa.gov/planetary/apod?api_key=kiITos2TeqNtXey1N7zrTx0y1lTosT4gNR8ptJEB&date=${queryDate}`)
     .then( data => {
@@ -65,10 +70,12 @@ function App() {
       setType(data.data.media_type)
       setContent(data.data.explanation)
       setDate(data.data.date)
+      setIsLoading(false)
     })
     .catch(error=>{
       console.log('error')
       alert('Select a different day')
+      setIsLoading(false)
     })
     // updates every time day month or year changes
   }, [day, month, year])
@@ -78,8 +85,15 @@ function App() {
     <AppContainer>
       <Top/>
       <DropdownDatePicker months = {months} d={d} m={m} yyyy={yyyy} setDay ={setDay} setMonth = {setMonth} setYear={setYear}/>
-      <Image title = {title} url= {APOD} imageType = {apodType} />
-      <InfoCard content = {content} date ={date} />
+      {isLoading ? (
+        <Loader type="TailSpin" color="#686868" height="100" width="100" />
+        ) : (
+          <>
+            <Image title = {title} url= {APOD} imageType = {apodType} />
+            <InfoCard content = {content} date ={date} />
+           </>
+          )
+      }
     </AppContainer>
   );
 }
