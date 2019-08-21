@@ -13,7 +13,7 @@ import Loader from 'react-loader-spinner';
 // style App div
 const AppContainer = styled.div`
   text-align: center;
-  width: 80%;
+  width: 90%;
   margin: auto;
 `;
 
