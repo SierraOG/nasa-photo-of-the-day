@@ -5,6 +5,9 @@ const InfoContainer = styled.div`
     width: 40%;
     font-size: 1.35rem;
     margin: 20px auto;
+    @media (max-width: 1050px) {
+        width: 80%;
+      }
 `;
 
 // takes in the title, explanation, and date from apps.js and returns it in info div

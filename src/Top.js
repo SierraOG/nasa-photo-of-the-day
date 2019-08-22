@@ -5,7 +5,7 @@ const TopContainer = styled.div`
   margin: 0 auto 10px;
 //   background-color: white; 
 //   background-image: linear-gradient(white, lightgrey); 
-  height: 75px;
+  height: 100%;
   padding-top:20px;
   border-radius: 15px;
 `;
@@ -14,7 +14,7 @@ const TopContainer = styled.div`
 function Top() {
     return(
         <TopContainer>
-            <h2> NASA Astronomy Picture of the Day </h2>
+            <h2> Astronomy Picture of the Day </h2>
         </TopContainer>
     )
 }

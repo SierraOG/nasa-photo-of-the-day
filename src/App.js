@@ -7,6 +7,7 @@ import Top from "./Top.js";
 import Image from './components/Image';
 import InfoCard from './components/InfoCard';
 import DropdownDatePicker from "./components/DatePicker";
+import Footer from './components/Footer'
 
 import Loader from 'react-loader-spinner';
 
@@ -16,6 +17,19 @@ const AppContainer = styled.div`
   margin: auto;
   color: white;
   background-color: #282828;
+`;
+
+
+// style info div
+const Info = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 75vh;
+  @media (max-width: 1050px) {
+    flex-direction: column;
+    font-size: 1rem;
+  }
 `;
 
 
@@ -89,12 +103,16 @@ function App() {
       {isLoading ? (
         <Loader type="TailSpin" color="#686868" height="100" width="100" />
         ) : (
-          <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '80vh'}}>
-            <Image title = {title} url= {APOD} imageType = {apodType} />
-            <InfoCard content = {content} date ={date} />
-           </div>
+          <>
+            <h1> {title}</h1>
+            <Info>
+              <Image title = {title} url= {APOD} imageType = {apodType} />
+              <InfoCard content = {content} date ={date} />
+            </Info>
+           </>
           )
       }
+      <Footer />
     </AppContainer>
   );
 }
