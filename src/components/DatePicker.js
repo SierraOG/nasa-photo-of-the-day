@@ -55,6 +55,7 @@ const DropdownDatePicker = ({months, d, m, yyyy, setDay, setMonth, setYear}) => 
     <React.Fragment>
     <p>Select a date:</p>
     <Dropdown
+        color='darkgrey'
         placeholder={m}
         closeOnBlur
         selection
