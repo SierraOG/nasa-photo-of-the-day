@@ -8,11 +8,19 @@ const ImageContainer = styled.div`
     margin: 10px auto;
     display: flex;
     justify-content: space-evenly;
+    @media (max-width: 1050px) {
+        width: 100%;
+        margin: auto;
+    }
 `;
 
 const Img = styled.img`
     max-width: 600px;
     box-shadow: 2px 2px 2px black;
+    @media (max-width: 1050px) {
+        width: 80%;
+        margin: auto;
+    }
 `;
 
 // returns the image or video from the data. Takes image type and has if statement to determine how to display the content depending on if it is a image or video 

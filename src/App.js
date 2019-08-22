@@ -20,6 +20,19 @@ const AppContainer = styled.div`
 `;
 
 
+// style info div
+const Info = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 75vh;
+  @media (max-width: 1050px) {
+    flex-direction: column;
+    font-size: 1rem;
+  }
+`;
+
+
 function App() {
   // state hooks for nasa data
   const [APOD, setPictureUrl] = useState("")
@@ -92,10 +105,10 @@ function App() {
         ) : (
           <>
             <h1> {title}</h1>
-            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '75vh'}}>
+            <Info>
               <Image title = {title} url= {APOD} imageType = {apodType} />
               <InfoCard content = {content} date ={date} />
-            </div>
+            </Info>
            </>
           )
       }
