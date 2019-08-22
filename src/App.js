@@ -7,6 +7,7 @@ import Top from "./Top.js";
 import Image from './components/Image';
 import InfoCard from './components/InfoCard';
 import DropdownDatePicker from "./components/DatePicker";
+import Footer from './components/Footer'
 
 import Loader from 'react-loader-spinner';
 
@@ -89,12 +90,16 @@ function App() {
       {isLoading ? (
         <Loader type="TailSpin" color="#686868" height="100" width="100" />
         ) : (
-          <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '80vh'}}>
-            <Image title = {title} url= {APOD} imageType = {apodType} />
-            <InfoCard content = {content} date ={date} />
-           </div>
+          <>
+            <h1> {title}</h1>
+            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '75vh'}}>
+              <Image title = {title} url= {APOD} imageType = {apodType} />
+              <InfoCard content = {content} date ={date} />
+            </div>
+           </>
           )
       }
+      <Footer />
     </AppContainer>
   );
 }

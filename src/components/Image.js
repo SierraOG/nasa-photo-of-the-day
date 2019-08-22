@@ -20,7 +20,7 @@ function Image({title, url, imageType}){
     if (imageType === 'video'){
         return (
             <div style={{margin: 'auto'}}>
-                <h1> {title}</h1>
+                {/* <h1> {title}</h1> */}
                 <ImageContainer>
                     <ReactPlayer url={url} playing/>
                 </ImageContainer>
@@ -30,7 +30,7 @@ function Image({title, url, imageType}){
     else {
         return (
             <div style={{margin: 'auto'}}>
-                <h1> {title}</h1>
+                {/* <h1> {title}</h1> */}
                 <ImageContainer>
                     <Img src={url}/> 
                 </ImageContainer>

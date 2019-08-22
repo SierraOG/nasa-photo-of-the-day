@@ -14,7 +14,7 @@ const TopContainer = styled.div`
 function Top() {
     return(
         <TopContainer>
-            <h2> NASA Astronomy Picture of the Day </h2>
+            <h2> Astronomy Picture of the Day </h2>
         </TopContainer>
     )
 }
