@@ -13,8 +13,9 @@ import Loader from 'react-loader-spinner';
 // style App div
 const AppContainer = styled.div`
   text-align: center;
-  width: 90%;
   margin: auto;
+  color: white;
+  background-color: #282828;
 `;
 
 
@@ -88,10 +89,10 @@ function App() {
       {isLoading ? (
         <Loader type="TailSpin" color="#686868" height="100" width="100" />
         ) : (
-          <>
+          <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '80vh'}}>
             <Image title = {title} url= {APOD} imageType = {apodType} />
             <InfoCard content = {content} date ={date} />
-           </>
+           </div>
           )
       }
     </AppContainer>

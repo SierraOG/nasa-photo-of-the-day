@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const TopContainer = styled.div`
   margin: 0 auto 10px;
-  background-color: white; 
-  background-image: linear-gradient(white, lightgrey); 
+//   background-color: white; 
+//   background-image: linear-gradient(white, lightgrey); 
   height: 75px;
   padding-top:20px;
   border-radius: 15px;
