@@ -42,6 +42,7 @@ function App() {
   const [date, setDate] = useState("")
 
   const [isLoading, setIsLoading] = useState(false)
+  const [errMsg, setErrMsg] = useState(null)
 
 
   // array of month names
@@ -86,32 +87,38 @@ function App() {
       setContent(data.data.explanation)
       setDate(data.data.date)
       setIsLoading(false)
+      setErrMsg(null)
     })
     .catch(error=>{
-      console.log('error')
-      alert('Select a different day')
       setIsLoading(false)
+      setErrMsg('There was a error finding data from that date. Please select a new date.')
     })
     // updates every time day month or year changes
   }, [day, month, year])
 
+  let BodyContent;
+  if (isLoading) {
+    BodyContent = <Loader type="TailSpin" color="#686868" height="100" width="100" />;
+  }
+  else if (errMsg) {
+    BodyContent = <h3 style={{margin: '100px'}}>{errMsg}</h3>
+  }
+  else{
+    BodyContent =           
+    <>
+      <h1> {title}</h1>
+      <Info>
+        <Image title = {title} url= {APOD} imageType = {apodType} />
+        <InfoCard content = {content} date ={date} />
+      </Info>
+   </>
+  }
   // builds app
   return (
     <AppContainer>
       <Top/>
       <DropdownDatePicker months = {months} d={d} m={m} yyyy={yyyy} setDay ={setDay} setMonth = {setMonth} setYear={setYear}/>
-      {isLoading ? (
-        <Loader type="TailSpin" color="#686868" height="100" width="100" />
-        ) : (
-          <>
-            <h1> {title}</h1>
-            <Info>
-              <Image title = {title} url= {APOD} imageType = {apodType} />
-              <InfoCard content = {content} date ={date} />
-            </Info>
-           </>
-          )
-      }
+      {BodyContent}
       <Footer />
     </AppContainer>
   );
